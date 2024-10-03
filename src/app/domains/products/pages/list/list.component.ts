@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { ProductComponent } from './../../components/product/product.component';
 import { CommonModule } from '@angular/common';
+import { Product } from '../../../shared/model/product.model';
 @Component({
   selector: 'app-list',
   standalone: true,
@@ -9,9 +10,31 @@ import { CommonModule } from '@angular/common';
   styleUrl: './list.component.css'
 })
 export class ListComponent {
-
+  products = signal<Product[]>([])
   fromChild(event: string) {
     console.log('Event from child', event);
   }
+
+  constructor() {
+    const initProducts:Product[] = [
+      {
+        id: Date.now(),
+        title: 'Product 1',
+        price: 100,
+        image: 'https://picsum.photos/640/640?r=41',
+        creationAt: new Date().toISOString()
+      },
+      {
+        id: Date.now(),
+        title: 'Product 2',
+        price: 140,
+        image: 'https://picsum.photos/640/640?r=4',
+        creationAt: new Date().toISOString()
+      },
+    ]
+
+    this.products.set(initProducts)
+  }
+
 
 }

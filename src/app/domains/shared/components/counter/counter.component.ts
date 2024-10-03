@@ -15,6 +15,7 @@ export class CounterComponent {
   constructor() {
     // BEFORE RENDER
     // NO ASYNC
+    // UNA VEZ
     console.log('CounterComponent constructor');
     console.log('-'.repeat(10))
   }
@@ -24,6 +25,29 @@ export class CounterComponent {
     console.log('CounterComponent ngOnChanges');
     console.log('-'.repeat(10))
     console.log(changes);
+  }
+
+  ngOnInit() {
+    // AFTER RENDER
+    // ASYNC, then, subscribe, promise
+    // UNA VEZ
+    console.log('CounterComponent ngOnInit');
+    console.log('-'.repeat(10))
+  }
+
+  ngAfterViewInit() {
+    // AFTER RENDER
+    // Para preguntar si los hijos de este componente fueron renderizados
+    console.log('CounterComponent ngAfterViewInit');
+    console.log('-'.repeat(10))
+  }
+
+  ngOnDestroy() {
+    // BEFORE DESTROY
+    // NO ASYNC
+    // UNA VEZ
+    console.log('CounterComponent ngOnDestroy');
+    console.log('-'.repeat(10))
   }
 
 

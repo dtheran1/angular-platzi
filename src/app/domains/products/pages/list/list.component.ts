@@ -10,4 +10,8 @@ import { CommonModule } from '@angular/common';
 })
 export class ListComponent {
 
+  fromChild(event: string) {
+    console.log('Event from child', event);
+  }
+
 }

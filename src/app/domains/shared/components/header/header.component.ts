@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -9,4 +9,10 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
 
+
+  isOpen = signal<boolean>(true);
+
+  toogleCart() {
+    this.isOpen.update(prevState => !prevState);
+  }
 }

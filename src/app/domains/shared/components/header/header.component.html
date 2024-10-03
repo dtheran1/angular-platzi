@@ -9,20 +9,21 @@
       <ul class="flex space-x-6">
         <li>
           <a href="#" class="block underline hover:underline" aria-current="page">Home</a>
-          
-          
         </li>
         <li>
-<a href="#" class="block hover:underline">About</a>
+          <a href="#" class="block hover:underline">About</a>
         </li>
         <li>
-<a href="#" class="block hover:underline">Services</a>
+          <a href="#" class="block hover:underline">Services</a>
         </li>
       </ul>
     </div>
 
     <div class="flex items-center">
-      <button class="px-4" (click)="toogleCart()">
+      <button class="p-2 border rounded relative" (click)="toogleCart()">
+        <div class="absolute -top-2 -left-2 rounded h-5 w-5 bg-black text-white text-xs">
+        {{ cart.length }}
+      </div>
         <svg fill="none" stroke="currentColor" stroke-linecap="round"
           class="w-6 h-6"
         stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -42,7 +43,7 @@
 >
   <div class="flex justify-between items-center">
     <p class="text-xl">My Cart</p>
-    <button (click)="toogleCart()">
+    <button  (click)="toogleCart()">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -58,5 +59,22 @@
         />
       </svg>
     </button>
+  </div>
+  <div>
+    <div *ngFor="let product of cart">
+      <div class="flex my-5">
+        <div class="mr-5">
+          <img [src]="product.image" [alt]="product.title" class="h-8 w-8 rounded-sm" />
+        </div>
+        <div class="flex-1">
+          <p class="font-semibold text-md mr-5"> {{ product.title }} </p>
+        </div>
+        <p class="text-red-400"> ${{ product.price }} </p>
+      </div>
+    </div>
+
+    <div class="flex justify-end">
+      <p><span class="text-lg font-semibold">Total: </span> <span class="text-lg text-red-400">$ {{ totalSignal() }}</span>  </p>
+    </div>
   </div>
 </div>

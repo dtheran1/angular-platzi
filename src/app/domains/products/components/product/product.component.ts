@@ -14,7 +14,7 @@ export class ProductComponent {
 
   addToCartHandler() {
     console.log('Add to cart');
-    this.addToCart.emit('Hola mundo ');
+    this.addToCart.emit(this.product);
   }
 
 }

@@ -12,10 +12,8 @@ import { HeaderComponent } from '../../../shared/components/header/header.compon
 })
 export class ListComponent {
   products = signal<Product[]>([])
-  fromChild(event: string) {
-    console.log('Event from child', event);
-  }
-
+  cart = signal<Product[]>([])
+  total = 0
   constructor() {
     const initProducts:Product[] = [
       {
@@ -65,5 +63,12 @@ export class ListComponent {
     this.products.set(initProducts)
   }
 
+  fromChild(product: Product) {
+    this.cart.update(prevState => {
+      return [...prevState, product ]
+    })
 
+    // Una posible solucion
+    this.total = this.cart().reduce((acc, item) => acc + item.price, 0)
+  }
 }

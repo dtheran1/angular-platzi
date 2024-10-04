@@ -64,7 +64,7 @@
     <div *ngFor="let product of cart()">
       <div class="flex my-5">
         <div class="mr-5">
-          <img [src]="product.image" [alt]="product.title" class="h-8 w-8 rounded-sm" />
+          <img [src]="product.images[0]" [alt]="product.title" class="h-8 w-8 rounded-sm" />
         </div>
         <div class="flex-1">
           <p class="font-semibold text-md mr-5"> {{ product.title }} </p>

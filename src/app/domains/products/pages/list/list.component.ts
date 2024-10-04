@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { Product } from '../../../shared/model/product.model';
 import { HeaderComponent } from '../../../shared/components/header/header.component';
 import { CartService } from '../../../shared/model/services/cart.service';
+import { ProductService } from '../../../shared/model/services/product.service';
 @Component({
   selector: 'app-list',
   standalone: true,
@@ -14,54 +15,16 @@ import { CartService } from '../../../shared/model/services/cart.service';
 export class ListComponent {
   products = signal<Product[]>([]);
   private cartService = inject(CartService);
+  private productService = inject(ProductService);
 
-  constructor() {
-    const initProducts:Product[] = [
-      {
-        id: Date.now(),
-        title: 'Product 1',
-        price: 100,
-        image: 'https://picsum.photos/640/640?r=41',
-        creationAt: new Date().toISOString()
-      },
-      {
-        id: Date.now(),
-        title: 'Product 2',
-        price: 140,
-        image: 'https://picsum.photos/640/640?r=4',
-        creationAt: new Date().toISOString()
-      },
-      {
-        id: Date.now(),
-        title: 'Product 1',
-        price: 100,
-        image: 'https://picsum.photos/640/640?r=41',
-        creationAt: new Date().toISOString()
-      },
-      {
-        id: Date.now(),
-        title: 'Product 2',
-        price: 140,
-        image: 'https://picsum.photos/640/640?r=4',
-        creationAt: new Date().toISOString()
-      },
-      {
-        id: Date.now(),
-        title: 'Product 1',
-        price: 100,
-        image: 'https://picsum.photos/640/640?r=41',
-        creationAt: new Date().toISOString()
-      },
-      {
-        id: Date.now(),
-        title: 'Product 2',
-        price: 140,
-        image: 'https://picsum.photos/640/640?r=4',
-        creationAt: new Date().toISOString()
-      },
-    ]
+  constructor() {}
 
-    this.products.set(initProducts)
+  ngOnInit() {
+    this.productService.getProducts().subscribe({
+      next: products => this.products.set(products),
+ 
+      error: error => console.log(error)
+    })
   }
 
   fromChild(product: Product) {

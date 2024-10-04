@@ -5,8 +5,6 @@ import { Product } from '../product.model';
   providedIn: 'root'
 })
 export class CartService {
-
-
   cart = signal<Product[]>([]);
   total = computed(() => {
     const cart = this.cart();

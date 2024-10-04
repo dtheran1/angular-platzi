@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, signal, SimpleChanges } from '@angular/core';
+import { Component, inject, Input, signal, SimpleChanges } from '@angular/core';
 import { Product } from '../../model/product.model';
+import { CartService } from '../../model/services/cart.service';
 
 @Component({
   selector: 'app-header',
@@ -10,26 +11,14 @@ import { Product } from '../../model/product.model';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent  {
-  @Input({required: true}) cart:Product[] = [];
-  @Input({required: true}) total:number = 0;
+  private cartService = inject(CartService);
+
+  cart = this.cartService.cart;
+  total = this.cartService.total;
+
   isOpen = signal<boolean>(true);
-
-  totalSignal = signal<number>(0);
-
-  // Mejor solucion
-  ngOnChanges(changes: SimpleChanges) {
-    const cart = changes['cart'];
-    if(cart) {
-      this.totalSignal.set(this.calTotal());
-    }
-  }
 
   toogleCart() {
     this.isOpen.update(prevState => !prevState);
   }
-
-  calTotal() {
-    return this.cart.reduce((acc, product) => acc + product.price, 0);
-  }
-
 }

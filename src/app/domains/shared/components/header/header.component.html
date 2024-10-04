@@ -22,7 +22,7 @@
     <div class="flex items-center">
       <button class="p-2 border rounded relative" (click)="toogleCart()">
         <div class="absolute -top-2 -left-2 rounded h-5 w-5 bg-black text-white text-xs">
-        {{ cart.length }}
+        {{ cart().length }}
       </div>
         <svg fill="none" stroke="currentColor" stroke-linecap="round"
           class="w-6 h-6"
@@ -61,7 +61,7 @@
     </button>
   </div>
   <div>
-    <div *ngFor="let product of cart">
+    <div *ngFor="let product of cart()">
       <div class="flex my-5">
         <div class="mr-5">
           <img [src]="product.image" [alt]="product.title" class="h-8 w-8 rounded-sm" />
@@ -74,7 +74,7 @@
     </div>
 
     <div class="flex justify-end">
-      <p><span class="text-lg font-semibold">Total: </span> <span class="text-lg text-red-400">$ {{ totalSignal() }}</span>  </p>
+      <p><span class="text-lg font-semibold">Total: </span> <span class="text-lg text-red-400">$ {{ total() }}</span>  </p>
     </div>
   </div>
 </div>

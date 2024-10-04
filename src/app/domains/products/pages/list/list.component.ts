@@ -1,8 +1,9 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { ProductComponent } from './../../components/product/product.component';
 import { CommonModule } from '@angular/common';
 import { Product } from '../../../shared/model/product.model';
 import { HeaderComponent } from '../../../shared/components/header/header.component';
+import { CartService } from '../../../shared/model/services/cart.service';
 @Component({
   selector: 'app-list',
   standalone: true,
@@ -11,9 +12,9 @@ import { HeaderComponent } from '../../../shared/components/header/header.compon
   styleUrl: './list.component.css'
 })
 export class ListComponent {
-  products = signal<Product[]>([])
-  cart = signal<Product[]>([])
-  total = 0
+  products = signal<Product[]>([]);
+  private cartService = inject(CartService);
+
   constructor() {
     const initProducts:Product[] = [
       {
@@ -64,11 +65,6 @@ export class ListComponent {
   }
 
   fromChild(product: Product) {
-    this.cart.update(prevState => {
-      return [...prevState, product ]
-    })
-
-    // Una posible solucion
-    this.total = this.cart().reduce((acc, item) => acc + item.price, 0)
+    this.cartService.addToCart(product);
   }
 }

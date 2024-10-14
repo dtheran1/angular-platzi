@@ -11,7 +11,7 @@ import { ProductService } from '@shared/model/services/product.service';
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.css'
 })
-export class ProductDetailComponent implements OnInit {
+export default class ProductDetailComponent implements OnInit {
   @Input() id?: string;
   private productService = inject(ProductService);
   cover =signal<string>('');
